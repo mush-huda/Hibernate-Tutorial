@@ -2,7 +2,6 @@ package org.huda.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +18,16 @@ public class UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int userId;
-	
+
 	@Column(name = "user_name")
 	private String userName;
-	
-//	@OneToMany(mappedBy = "userDetails") 
+
 	@OneToMany
-	private Collection<Vehicle> vehicle = new ArrayList<Vehicle>();
-	
+	private Collection<Vehicle> vehicle;
+
+	public UserDetails() {
+		vehicle = new ArrayList<Vehicle>();
+	}
 
 	public int getUserId() {
 		return userId;
