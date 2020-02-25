@@ -13,13 +13,19 @@ public class HibernateTest {
 		user.setUserName("Mushfiqul");
 		
 		Vehicle vehicle = new Vehicle();
-		vehicle.setVehicleName("Audi");
+		vehicle.setVehicleName("Any Vehicle");
 		
-		Vehicle vehicle2 = new Vehicle();
-		vehicle2.setVehicleName("BMW");
+		TwoWheeler vehicle2 = new TwoWheeler();
+		vehicle2.setVehicleName("Bike");
+		vehicle2.setSteeringHandle("Bike steering handle");
+		
+		FourWheeler vehicle3 = new FourWheeler();
+		vehicle3.setVehicleName("Car");
+		vehicle3.setSteeringWheel("Car steering wheel");
 		
 		user.setVehicle(vehicle);
 		user.setVehicle(vehicle2);
+		user.setVehicle(vehicle3);
 		
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	
@@ -29,6 +35,7 @@ public class HibernateTest {
 		session.save(user);
 		session.save(vehicle);
 		session.save(vehicle2);
+		session.save(vehicle3);
 		session.getTransaction().commit();
 		session.close();
 	}

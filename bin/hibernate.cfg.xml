@@ -24,6 +24,8 @@
         <!-- Annotated entity classes -->
         <mapping class="org.huda.dto.UserDetails"/>
         <mapping class="org.huda.dto.Vehicle"/>
+        <mapping class="org.huda.dto.TwoWheeler"/>
+        <mapping class="org.huda.dto.FourWheeler"/>
          
     </session-factory>
 </hibernate-configuration>
