@@ -9,17 +9,20 @@ public class HibernateTest {
 
 	public static void main(String[] args) {
 		
-		UserDetails user = new UserDetails();
-		user.setUserName("Mushfiqul");
-		
-		Vehicle vehicle = new Vehicle();
-		vehicle.setVehicleName("Audi");
+		Vehicle vehicle1 = new Vehicle();
+		vehicle1.setVehicleName("Audi");
 		
 		Vehicle vehicle2 = new Vehicle();
 		vehicle2.setVehicleName("BMW");
 		
-		user.setVehicle(vehicle);
-		user.setVehicle(vehicle2);
+		UserDetails user = new UserDetails();
+		user.setUserName("Mushfiqul");
+		
+		user.setVehicleList(vehicle1);
+		user.setVehicleList(vehicle2);
+		
+		vehicle1.setUserList(user);
+		vehicle2.setUserList(user);
 		
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	
@@ -27,7 +30,7 @@ public class HibernateTest {
 		
 		session.beginTransaction();
 		session.save(user);
-		session.save(vehicle);
+		session.save(vehicle1);
 		session.save(vehicle2);
 		session.getTransaction().commit();
 		session.close();

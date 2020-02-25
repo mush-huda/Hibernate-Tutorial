@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,13 +25,13 @@ public class UserDetails {
 	@Column(name = "user_name")
 	private String userName;
 
-	@OneToMany()
+	@ManyToMany
 	@JoinTable(name = "user_vehicle", joinColumns = @JoinColumn(name="user_id"),
 					inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-	private Collection<Vehicle> vehicle;
+	private Collection<Vehicle> vehicleList;
 
 	public UserDetails() {
-		vehicle = new ArrayList<Vehicle>();
+		vehicleList = new ArrayList<Vehicle>();
 	}
 
 	public int getUserId() {
@@ -49,12 +50,12 @@ public class UserDetails {
 		this.userName = userName;
 	}
 
-	public Collection<Vehicle> getVehicle() {
-		return vehicle;
+	public Collection<Vehicle> getVehicleList() {
+		return vehicleList;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle.add(vehicle);
+	public void setVehicleList(Vehicle vehicle) {
+		this.vehicleList.add(vehicle);
 	}
 
 }
