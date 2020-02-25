@@ -33,7 +33,7 @@ public class HibernateTest {
 		
 		session.beginTransaction();
 		session.save(user);
-		session.save(vehicle);
+		session.save(vehicle1);
 		session.save(vehicle2);
 		session.save(vehicle3);
 		session.getTransaction().commit();
