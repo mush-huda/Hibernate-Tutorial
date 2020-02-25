@@ -1,11 +1,15 @@
 package org.huda.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,9 +25,13 @@ public class Vehicle {
 	@Column(name = "vehicle_name")
 	private String vehicleName;
 	
-//	@ManyToOne
+	@ManyToMany(mappedBy = "vehicleList")
 //	@JoinColumn(name = "user_id")
-//	private UserDetails userDetails;
+	private Collection<UserDetails> userList;
+	
+	public Vehicle(){
+		this.userList = new ArrayList<UserDetails>(); 
+	}
 
 	public int getVehicleId() {
 		return vehicleId;
@@ -41,4 +49,13 @@ public class Vehicle {
 		this.vehicleName = vehicleName;
 	}
 
+	public Collection<UserDetails> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(UserDetails userList) {
+		this.userList.add(userList);
+	}
+
+	
 }
