@@ -2,9 +2,11 @@ package org.huda.hibernate;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.huda.dto.*;
 
@@ -16,9 +18,11 @@ public class HibernateTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Query<Vehicle> query = session.createQuery("from Vehicle as v where vehicleId>1");
+		Criteria criteria = session.createCriteria(Vehicle.class);
+		criteria.add(Restrictions.eq("vehicleName", "Car"));
 
-		List<Vehicle> veh = query.list();
+		List<Vehicle> veh = (List<Vehicle>)criteria.list();
+
 		session.getTransaction().commit();
 		session.close();
 		
