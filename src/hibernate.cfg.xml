@@ -19,13 +19,17 @@
         <property name="show_sql">true</property>
   
         <!-- Update database on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
   
         <!-- Annotated entity classes -->
         <mapping class="org.huda.dto.UserDetails"/>
         <mapping class="org.huda.dto.Vehicle"/>
         <mapping class="org.huda.dto.TwoWheeler"/>
         <mapping class="org.huda.dto.FourWheeler"/>
+    	<mapping class="org.huda.dto.Employee"/>
+    	<mapping class="org.huda.dto.Address"/>
+    	<mapping class="org.huda.dto.Skill"/>
+    	<mapping class="org.huda.dto.Department"/>	
          
     </session-factory>
 </hibernate-configuration>
