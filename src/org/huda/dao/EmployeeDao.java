@@ -2,9 +2,9 @@ package org.huda.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.huda.dto.Address;
-import org.huda.dto.Department;
-import org.huda.dto.Employee;
+import org.huda.model.Address;
+import org.huda.model.Department;
+import org.huda.model.Employee;
 import org.huda.util.HibernateUtil;
 
 public class EmployeeDao {
@@ -25,32 +25,48 @@ public class EmployeeDao {
 			e.printStackTrace();
 		}
 	}
-
-	public Employee getUser(int employeeId) {
+	
+	public void persistObject(Object object) {
 		Transaction transaction = null;
-		Employee user = null;
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
-			user = (Employee) session.get(Employee.class, employeeId);
+			session.persist(object);
 			transaction.commit();
-			return user;
 		} catch (Exception e) {
 			if (transaction == null) {
 				transaction.rollback();
 			}
 			e.printStackTrace();
 		}
-		return user;
 	}
+	
+	public <T> T getObject(Class<T> className, int key) {
+		Transaction transaction = null;
+		T dbObject = null;
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			transaction = session.beginTransaction();
+			dbObject = className.cast(session.get(className, key));
+			transaction.commit();
+			return dbObject;
+		} catch (Exception e) {
+			if (transaction == null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return dbObject;
+	}
+		
 
 	public void updateUserEmail(int employeeId, String newEmail) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
-			Employee user = getUser(employeeId);
-			user.setEmail(newEmail);
-			session.update(user);
+			Employee employee = getObject(Employee.class, employeeId);
+			employee.setEmail(newEmail);
+			session.update(employee);
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction == null) {
@@ -60,13 +76,11 @@ public class EmployeeDao {
 		}
 	}
 
-	public void deleteUser(int employeeId) {
+	public <T> void deleteObject(Class<T> className, int employeeId) {
 		Transaction transaction = null;
-
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
-			Employee user = getUser(employeeId);
-			session.delete(user);
+			session.delete(getObject(className, employeeId));
 			transaction.commit();
 		} catch (Exception e) {
 			if (transaction == null) {

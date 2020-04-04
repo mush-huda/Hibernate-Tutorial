@@ -1,4 +1,4 @@
-package org.huda.dto;
+package org.huda.model.inheritance;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package org.huda.dto;
+package org.huda.model;
 
 
 import java.util.ArrayList;
@@ -53,6 +53,12 @@ public class Skill {
 
 	public void setEmployees(Employee employees) {
 		this.employees.add(employees);
+	}
+	
+	@Override
+	public String toString() {
+		return "\n" + "skill_id: " + this.getSkillId() + "\n" + "skill_name: " 
+				+ this.getSkillName() + "\n";
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.huda.dto;
+package org.huda.model.inheritance;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
